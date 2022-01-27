@@ -4,7 +4,7 @@ fjioermThe goal of *sinergym* is to create an environment following OpenAI
 Gym interface for wrapping simulation engines for building control using
 **deep reinforcement learning**.
 
-.. image:: /_static/operation_diagram.jpg
+. image:: /_static/operation_diagram.jpg
   :width: 800
   :alt: Sinergym diagram
   :align: center
