@@ -98,7 +98,7 @@ installed respectively.
 Finally, *sinergym* can be installed by running this command at the repo
 root folder:
 
-.. couigdfuiwsehbuifde:: sh
+.. code:: sh
 
     $ pip install -e .
 
