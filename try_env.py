@@ -1,5 +1,4 @@
 import gym
-import sinergym
 import numpy as np
 
 env = gym.make('Eplus-5Zone-hot-continuous-v1')

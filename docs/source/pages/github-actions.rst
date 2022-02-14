@@ -11,8 +11,11 @@ Currently, we have developed the next procedures for this project:
 Pull Request
 *************
 
-- **Python Code format check**: Python code format is checked in every pull request following **Pep8** `standard <https://www.python.org/dev/peps/pep-0008/>`__ (Level 2 aggressive). If format is incorrect, a bot will comment in pull request advising that issue and notifying it will be correct merging with main.
-- **Documentation Checks**: This action compile documentation *source* in every pull-request, verify if documentation build is successful.
+- **Python Code format check**: Python code format is checked in every pull request following **Pep8** `standard <https://www.python.org/dev/peps/pep-0008/>`__ (Level 2 aggressive) and `isort <https://github.com/PyCQA/isort>`__ to sort imports. 
+  If format is incorrect, a bot will comment in pull request advising that issue and notifying it will be correct merging with main.
+- **Code type check**: We are using `pytype <https://github.com/google/pytype>`__ in Sinergym module. This let dynamic types in Python like it is usual, but controlling input and output types in functions and methods. This workflow ignore `import-error` type using command `pytype -d import-error sinergym/`.
+  For example, **pytype** cannot include google cloud storage module, so this option specification is necessary. If some type error happens, the workflow show error until user fix it.
+- **Documentation Checks**: This action checks whether source documentation has been modified in every pull-request. If source documentation has been updated, it will compile documentation with Sphinx and raise errors if exist.
 
 .. warning:: Sphinx Warning messages behave like errors for workflow status.
 
@@ -31,7 +34,7 @@ Pull Request
 Push main (or merge a pull request)
 ************************************
 
-- **Apply format autopep8**: A bot generates a commit in main branch applying format changes when it is necessary.
+- **Apply format**: A bot generates a commit in main branch applying format changes when it is necessary (autopep8 2 level aggressive and/or isort module).
 - **Update Documentation build to GitHub pages**: A bot generates a commit in main branch applying new documentation build when it is necessary.
 - **Update our Docker Hub repository**: This job builds container with all extra requires and it is pushed to our `Docker Hub repository <https://hub.docker.com/r/alejandrocn7/sinergym>`__ using *latest* tag automatically. It needs format and documentation jobs finish for possible changes.
 
@@ -40,6 +43,7 @@ New release created or modified
 ********************************
 
 - When a **release** is *published* or *edited* manually in the repository, there is an action which catches release tag version and uses it to build a container and upload/update on Docker Hub with that tag version.
+- At the same time, another job will update the **PyPi** Sinergym repository with its current version tag.
 
 .. note:: See `.github/workflows YML files <https://github.com/jajimer/sinergym/tree/develop/.github/workflows>`__ to see code used.
 

@@ -1,31 +1,28 @@
 """Implementation of basic controllers."""
-
-import os
-import pkg_resources
-
 from datetime import datetime
+from typing import Any, List, Optional, Sequence, Tuple
 
 from ..utils.common import parse_variables
 
 
 class RandomController(object):
 
-    def __init__(self, env):
+    def __init__(self, env: Any):
         """Random agent. It selects available actions randomly.
 
         Args:
-            env (object): Simulation environment.
+            env (Any): Simulation environment.
         """
         self.env = env
 
-    def act(self, observation=None):
+    def act(self, observation: Optional[List[Any]] = None) -> Sequence[Any]:
         """Selects a random action from the environment's `action_space`.
 
         Args:
-            observation (object, optional): Perceived observation. Defaults to None.
+            observation (Optional[List[Any]], optional): Perceived observation. Defaults to None.
 
         Returns:
-            object: Action chosen.
+            Sequence[Any]: Action chosen.
         """
         action = self.env.action_space.sample()
         return action
@@ -34,15 +31,15 @@ class RandomController(object):
 class RuleBasedController(object):
 
     def __init__(
-        self, env, range_comfort_winter=(
-            20.0, 23.5), range_comfort_summer=(
-            23.0, 26.0)):
+        self, env: Any, range_comfort_winter: Tuple[float, float] = (
+            20.0, 23.5), range_comfort_summer: Tuple[float, float] = (
+            23.0, 26.0)) -> None:
         """Agent whose actions are based on static rules.
 
         Args:
-            env (object): Simulation environment.
-            range_comfort_winter (tuple, optional): Comfort temperature range for cool season. Defaults to (20.0, 23.5).
-            range_comfort_summer (tuple, optional): Comfort temperature range for hot season. Defaults to (23.0, 26.0).
+            env (Any): Simulation environment.
+            range_comfort_winter (Tuple[float, float], optional): Comfort temperature range for cool season. Defaults to (20.0, 23.5).
+            range_comfort_summer (Tuple[float, float], optional): Comfort temperature range for hot season. Defaults to (23.0, 26.0).
         """
 
         year = 2021
@@ -58,14 +55,14 @@ class RuleBasedController(object):
         self.summer_start_date = datetime(year, 6, 1)
         self.summer_final_date = datetime(year, 9, 30)
 
-    def act(self, observation):
+    def act(self, observation: List[Any]) -> Sequence[Any]:
         """Select action based on outdoor air drybulb temperature.
 
         Args:
-            observation (object): Perceived observation.
+            observation (List[Any]): Perceived observation.
 
         Returns:
-            object: Action chosen.
+            Sequence[Any]: Action chosen.
         """
         obs_dict = dict(zip(self.variables['observation'], observation))
         out_temp = obs_dict['Site Outdoor Air Drybulb Temperature (Environment)']

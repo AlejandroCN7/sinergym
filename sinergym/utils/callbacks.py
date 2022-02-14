@@ -1,18 +1,17 @@
 """Custom Callbacks for stable baselines 3 algorithms."""
 
-from stable_baselines3.common.callbacks import BaseCallback, EvalCallback
-import numpy as np
-import gym
 import os
-from sinergym.utils.wrappers import NormalizeObservation, LoggerWrapper
-
-from pprint import pprint
-
 import warnings
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+from typing import Any, Callable, Dict, Optional, Union
+
+import gym
+import numpy as np
 from stable_baselines3.common import base_class
-from stable_baselines3.common.vec_env import VecEnv, sync_envs_normalization
+from stable_baselines3.common.callbacks import BaseCallback, EvalCallback
 from stable_baselines3.common.env_util import is_wrapped
+from stable_baselines3.common.vec_env import VecEnv, sync_envs_normalization
+
+from sinergym.utils.wrappers import LoggerWrapper, NormalizeObservation
 
 
 class LoggerCallback(BaseCallback):
@@ -194,8 +193,8 @@ class LoggerEvalCallback(EvalCallback):
         callback_on_new_best: Optional[BaseCallback] = None,
         n_eval_episodes: int = 5,
         eval_freq: int = 10000,
-        log_path: str = None,
-        best_model_save_path: str = None,
+        log_path: Optional[str] = None,
+        best_model_save_path: Optional[str] = None,
         deterministic: bool = True,
         render: bool = False,
         verbose: int = 1,
@@ -316,16 +315,20 @@ class LoggerEvalCallback(EvalCallback):
         return True
 
 
-def evaluate_policy(
-        model: "base_class.BaseAlgorithm",
-        env: Union[gym.Env, VecEnv],
-        n_eval_episodes: int = 5,
-        deterministic: bool = True,
-        render: bool = False,
-        callback: Optional[Callable[[Dict[str, Any], Dict[str, Any]], None]] = None,
-        reward_threshold: Optional[float] = None,
-        return_episode_rewards: bool = False,
-        warn: bool = True):
+def evaluate_policy(model: "base_class.BaseAlgorithm",
+                    env: Union[gym.Env,
+                               VecEnv],
+                    n_eval_episodes: int = 5,
+                    deterministic: bool = True,
+                    render: bool = False,
+                    callback: Optional[Callable[[Dict[str,
+                                                      Any],
+                                                 Dict[str,
+                                                      Any]],
+                                                None]] = None,
+                    reward_threshold: Optional[float] = None,
+                    return_episode_rewards: bool = False,
+                    warn: bool = True) -> Any:
     """Runs policy for ``n_eval_episodes`` episodes and returns average reward. This is made to work only with one env.
         .. note:: If environment has not been wrapped with ``Monitor`` wrapper, reward and
         episode lengths are counted as it appears with ``env.step`` calls. If
@@ -430,4 +433,5 @@ def evaluate_policy(
         assert mean_reward > reward_threshold, "Mean reward below threshold: " f"{mean_reward:.2f} < {reward_threshold:.2f}"
     if return_episode_rewards:
         return episodes_rewards, episodes_lengths, episodes_powers, episodes_comfort_violations, episodes_comfort_penalties, episodes_power_penalties
-    return mean_reward, std_reward
+    else:
+        return mean_reward, std_reward

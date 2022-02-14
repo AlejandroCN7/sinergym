@@ -1,24 +1,23 @@
-from stable_baselines3.common.logger import configure
-from stable_baselines3.common.vec_env import DummyVecEnv
-from stable_baselines3.common.callbacks import CallbackList
-from stable_baselines3 import A2C, DDPG, DQN, PPO, SAC
-from stable_baselines3.common.noise import NormalActionNoise
-import sinergym.utils.gcloud as gcloud
-from sinergym.utils.common import RANGES_5ZONE, RANGES_IW, RANGES_DATACENTER
-import gym
-import sinergym
 import argparse
-import uuid
-import mlflow
 import os
 from datetime import datetime
 
+import gym
+import mlflow
 import numpy as np
+from stable_baselines3 import A2C, DDPG, DQN, PPO, SAC
+from stable_baselines3.common.callbacks import CallbackList
+from stable_baselines3.common.logger import configure
+from stable_baselines3.common.noise import NormalActionNoise
+from stable_baselines3.common.vec_env import DummyVecEnv
 
+import sinergym
+import sinergym.utils.gcloud as gcloud
 from sinergym.utils.callbacks import LoggerCallback, LoggerEvalCallback
-from sinergym.utils.wrappers import MultiObsWrapper, NormalizeObservation, LoggerWrapper
+from sinergym.utils.common import RANGES_5ZONE, RANGES_DATACENTER, RANGES_IW
 from sinergym.utils.rewards import *
-
+from sinergym.utils.wrappers import (LoggerWrapper, MultiObsWrapper,
+                                     NormalizeObservation)
 
 #--------------------------------BATTERY ARGUMENTS DEFINITION---------------------------------#
 parser = argparse.ArgumentParser()
@@ -159,10 +158,10 @@ if args.seed:
     name += '-seed_' + str(args.seed)
 name += '(' + experiment_date + ')'
 # Check if MLFLOW_TRACKING_URI is defined
-if os.environ.get('MLFLOW_TRACKING_URI') is not None:
+mlflow_tracking_uri = os.environ.get('MLFLOW_TRACKING_URI')
+if mlflow_tracking_uri is not None:
     # Check ping to server
-    mlflow_ip = os.environ.get(
-        'MLFLOW_TRACKING_URI').split('/')[-1].split(':')[0]
+    mlflow_ip = mlflow_tracking_uri.split('/')[-1].split(':')[0]
     # If server is not valid, setting default local path to mlflow
     response = os.system("ping -c 1 " + mlflow_ip)
     if response != 0:
@@ -222,16 +221,16 @@ with mlflow.start_run(run_name=name):
     if args.normalization:
         # We have to know what dictionary ranges to use
         norm_range = None
-        env_type = args.environment.split('-')[2]
+        env_type = args.environment.split('-')[1]
         if env_type == 'datacenter':
-            range = RANGES_5ZONE
+            norm_range = RANGES_DATACENTER
         elif env_type == '5Zone':
-            range = RANGES_IW
+            norm_range = RANGES_5ZONE
         elif env_type == 'IWMullion':
-            range = RANGES_DATACENTER
+            norm_range = RANGES_IW
         else:
             raise NameError('env_type is not valid, check environment name')
-        env = NormalizeObservation(env, ranges=range)
+        env = NormalizeObservation(env, ranges=norm_range)
     if args.logger:
         env = LoggerWrapper(env)
     if args.multiobs:
