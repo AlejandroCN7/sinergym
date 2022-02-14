@@ -272,7 +272,7 @@ def parse_observation_action_space(space_file: str) -> Dict[str, Any]:
     return result
 
 
-def create_variable_weather(weather_data: WeatherData,original_epw_file: str,columns: str = ['drybulb'],variation: Optional[Tuple[float, float, float]] = None) -> Optional[str]:
+def create_variable_weather(weather_data: WeatherData,original_epw_file: str,columns: List[str] = ['drybulb'],variation: Optional[Tuple[float, float, float]] = None) -> Optional[str]:
     """Create a new weather file using Ornstein-Uhlenbeck process.
 
     Args:
