@@ -1,11 +1,11 @@
 """Class and utilities for set up extra configuration in experiments with Sinergym (extra params, weather_variability, building model modification and files management)"""
+import numpy as np
+from opyplus import WeatherData, Epm, Idd
+
 import os
 from copy import deepcopy
 from shutil import rmtree
 from typing import Any, Dict, List, Optional, Tuple
-
-import numpy as np
-from opyplus import Epm, Idd, WeatherData
 
 from sinergym.utils.common import get_delta_seconds, prepare_batch_from_records
 

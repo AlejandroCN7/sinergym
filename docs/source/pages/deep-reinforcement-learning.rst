@@ -27,7 +27,7 @@ Current algorithms checked by Sinergym are:
 DRL Logger
 ****************
 
-`Callbacks <https://stable-baselines3.readthedocs.io/en/master/guide/callbacks.html>`__ are a set of functions that will 
+`Callbacks <https://stable-baselines3.readthedocs.io/en/master/guide/callbacks.html>`__ areyu a set of functions that will 
 be called at given stages of the training procedure. You can use callbacks to access internal state of the RL model during training. 
 It allows one to do monitoring, auto saving, model manipulation, progress bars, ...
 
