@@ -27,7 +27,7 @@ Current algorithms checked by Sinergym are:
 DRL Logger
 ****************
 
-`Callbacks <https://stable-baselines3.readthedocs.io/en/master/guide/callbacks.html>`__ uinfwiefbniw a set of functions that will 
+`Callbacks <https://stable-baselines3.readthedocs.io/en/master/guide/callbacks.html>`__ are a set of functions that will 
 be called at given stages of the training procedure. You can use callbacks to access internal state of the RL model during training. 
 It allows one to do monitoring, auto saving, model manipulation, progress bars, ...
 
@@ -76,7 +76,7 @@ The main structure for Sinergym with Tensorboard is:
     - *mean_reward*: Mean reward obtained per step in episode.
 * **observation**: Here is recorded all observation values during simulation. This values depends on the environment which is being simulated (see :ref:`Output format`).
 * **normalized_observation** (optional): This section appear only when environment has been wrapped with normalization (see :ref:`Wrappers`). The model will train with this normalized values and they will be recorded both; original observation and normalized observation.
-* **rollout**: Algorithm metrics in Stable Baselines by default. For example, DQN has *exploration_rate* and this value doesn't appear in other algorithms.
+* **rollout**: Algorithm metrics in Stable Baselines by default. For example, DQN has *exploration_rate* and this value does not appear in other algorithms.
 * **time**: Monitoring time of execution.
 * **train**: Record specific neural network information for each algorithm, provided by Stable baselines as well as rollout.
 

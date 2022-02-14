@@ -41,6 +41,7 @@ deserialized
 dicts
 dir
 Dockerfile
+docstring
 DQN
 drybulb
 Energyplus
@@ -79,6 +80,7 @@ idd
 idf
 init
 isort
+iterable
 IWMullion
 kfac
 Khee

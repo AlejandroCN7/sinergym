@@ -415,7 +415,7 @@ def setpoints_transform(action: Union[int,
 
 
 def get_record_keys(record: Record) -> List[str]:
-    """Given an opyplus Epm Record (one element from opyplus.epm object) this function returns list of keys (opyplus hasn't got this functionality explicitly)
+    """Given an opyplus Epm Record (one element from opyplus.epm object) this function returns list of keys (opyplus has not got this functionality explicitly)
 
      Args:
         record (opyplus.Epm.Record): Element from Epm object.

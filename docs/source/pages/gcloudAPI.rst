@@ -113,7 +113,7 @@ We have available containers in Docker Hub too. Please, visit our `repository <h
 
 .. note:: It is possible to change parameters in order to set up your own VM with your preferences (see `create-with-container <https://cloud.google.com/sdk/gcloud/reference/compute/instances/create-with-container>`__).
 
-.. warning:: ``--boot-disk-size`` is really important, by default VM set 10GB and it isn't enough at all for Sinergym container.
+.. warning:: ``--boot-disk-size`` is really important, by default VM set 10GB and it is not enough at all for Sinergym container.
               This derive in a silence error for Google Cloud Build (and you would need to check logs, which incident is not clear).
 
 3. Use your own container
@@ -139,7 +139,7 @@ project in Google Cloud global configuration.
 
 .. warning:: In the same way VM needs more memory, Google Cloud Build needs at least 10GB to work correctly. In other case it may fail.
 
-.. warning:: If your local computer doesn't have enough free space it might report the same error (there isn't difference by Google cloud error manager),
+.. warning:: If your local computer does not have enough free space it might report the same error (there is not difference by Google cloud error manager),
              so be careful.
 
 In order to execute **cloudbuild.yaml**, you have to do the next:
@@ -176,7 +176,7 @@ To create a **VM** that uses this container, here there is an example:
 
 .. note:: ``--container-restart-policy never`` it's really important for a correct functionality.
 
-.. warning:: If you decide enter in VM after create it immediately, it is possible container hasn't been created yet. 
+.. warning:: If you decide enter in VM after create it immediately, it is possible container has not been created yet. 
              You can think that is an error, Google cloud should notify this. If this issue happens, you should wait for a several minutes.
 
 To create a **MIG**, you need to create a machine set up **template** firstly, for example:
@@ -207,7 +207,7 @@ Then, you can create a group-instances as large as you want:
         --size 3 \
         --template sinergym-template
 
-.. warning:: It is possible that quote doesn't let you have more than one VM at the same time. Hence, the rest of VM's probably will be *initializing* always but never ready. If it is your case, we recommend you check your quotes `here <https://console.cloud.google.com/iam-admin/quotas>`__
+.. warning:: It is possible that quote does not let you have more than one VM at the same time. Hence, the rest of VM's probably will be *initializing* always but never ready. If it is your case, we recommend you check your quotes `here <https://console.cloud.google.com/iam-admin/quotas>`__
 
 5. Initiate your VM
 ~~~~~~~~~~~~~~~~~~~~
@@ -256,10 +256,10 @@ The list of parameter is pretty large. Let's see it:
 - ``--episodes`` or ``-ep``: Number of episodes you want to train agent in simulation (Depending on environment episode length can be different)
 - ``--algorithm`` or ``-alg``: Algorithm you want to use to train (Currently, it is available *PPO*, *A2C*, *DQN*, *DDPG* and *SAC*)
 - ``--reward`` or ``-rw``: Reward class you want to use for reward function. Currently, possible values are "linear" and "exponential"(see :ref:`Rewards`).
-- ``--normalization`` or ``-norm``: Apply normalization wrapper to observations during training. If it isn't specified wrapper will not be applied (see :ref:`Wrappers`).
-- ``--multiobs`` or ``-mobs``: Apply Multi-Observation wrapper to observations during training. If it isn't specified wrapper will not be applied (see :ref:`Wrappers`).
-- ``--logger`` or ``-log``: Apply Sinergym logger wrapper during training. If it isn't specified wrapper will not be applied (see :ref:`Wrappers` and :ref:`Logger`).
-- ``--tensorboard`` or ``-tens``: This parameter will contain a **path-file** or **path-remote-bucket** to allocate tensorboard training logs. If it isn't specified this log will be deactivate (see :ref:`DRL Logger`).
+- ``--normalization`` or ``-norm``: Apply normalization wrapper to observations during training. If it is not specified wrapper will not be applied (see :ref:`Wrappers`).
+- ``--multiobs`` or ``-mobs``: Apply Multi-Observation wrapper to observations during training. If it is not specified wrapper will not be applied (see :ref:`Wrappers`).
+- ``--logger`` or ``-log``: Apply Sinergym logger wrapper during training. If it is not specified wrapper will not be applied (see :ref:`Wrappers` and :ref:`Logger`).
+- ``--tensorboard`` or ``-tens``: This parameter will contain a **path-file** or **path-remote-bucket** to allocate tensorboard training logs. If it is not specified this log will be deactivate (see :ref:`DRL Logger`).
 - ``--evaluation`` or ``-eval``: If it is specified, evaluation callback will be activate, else model evaluation will be deactivate during training (see :ref:`Deep Reinforcement Learning Integration`).
 - ``--eval_freq`` or ``-evalf``: Only if ``--evaluation`` flag has been written. Episode frequency for evaluation.
 - ``--eval_length`` or ``-evall``: Only if ``--evaluation`` flag has been written. Number of episodes for each evaluation.
@@ -320,9 +320,9 @@ as the training is generating it (see `this issue <https://github.com/ContinualA
 
 .. note:: If in ``--tensorboard`` you have specified a gs path, ``--remote_store`` or ``--mlflow_store`` parameters don't store tensorboard logs.
 
-.. warning:: Whether you have written a bucket path, don't write ``/`` at the end (*gs://experiments-storage/tensorboard_log/*), this causes that real-time remote storage doesn't work correctly.
+.. warning:: Whether you have written a bucket path, don't write ``/`` at the end (*gs://experiments-storage/tensorboard_log/*), this causes that real-time remote storage does not work correctly.
 
-.. warning:: In the case that gs URI isn't recognized. Maybe is due to your tensorboard installation hasn't got access your google account. Try `gcloud auth application-default login <https://cloud.google.com/sdk/gcloud/reference/auth/application-default/login>`__ command.
+.. warning:: In the case that gs URI is not recognized. Maybe is due to your tensorboard installation has not got access your google account. Try `gcloud auth application-default login <https://cloud.google.com/sdk/gcloud/reference/auth/application-default/login>`__ command.
 
 Visualize remote Tensorboard log in real-time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
