@@ -85,6 +85,7 @@ jobs:
         with:
           branch: gh-pages
           file_pattern: docs/compilation/*
+          push_options: --force
           commit_message: Documentation source update detected and pushed compilation build directory for Github Pages
       
   update-dockerhub:
