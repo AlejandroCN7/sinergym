@@ -51,7 +51,7 @@ jobs:
 
   apply-documentation:
     name: Documentation compilation update by bot
-    needs: [apply-autopep8]
+#    needs: [apply-autopep8]
     runs-on: ubuntu-latest    
     steps:
       - name: Checkout code
