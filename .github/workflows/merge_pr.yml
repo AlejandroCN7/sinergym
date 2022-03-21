@@ -84,12 +84,6 @@ jobs:
           file_pattern: docs/compilation/*
           push_options: --force
           commit_message: Documentation source update detected and pushed compilation build directory for Github Pages
-          # Optional. Disable dirty check and always try to create a commit and push
-          skip_dirty_check: true    
-          # Optional. Skip internal call to `git fetch`
-          skip_fetch: true   
-          # Optional. Skip internal call to `git checkout`
-          skip_checkout: true
       
   update-dockerhub:
     needs: [apply-autopep8, apply-documentation]
