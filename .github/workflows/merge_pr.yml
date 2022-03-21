@@ -64,7 +64,7 @@ jobs:
       - name: delete old documentation compilation
         if: steps.verify-documentation-update.outputs.doc == 'true'
         run: |
-          git checkout gh-pages
+          git checkout remotes/origin/gh-pages
           rm -R docs/compilation
           git checkout main
       - name: Upgrade pip
