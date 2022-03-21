@@ -81,6 +81,7 @@ jobs:
         #   file_pattern: docs/build/*
         #   commit_message: Documentation source update detected and pushed compilation build directory for Github Pages
         run: |
+          git fetch
           git checkout gh-pages
           git add docs/build/*
           git commit -m "Documentation source update detected and pushed compilation build directory for Github Pages"
