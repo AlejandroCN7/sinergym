@@ -4,7 +4,7 @@ Controllers
 
 Sinergym has a section to implement your own controllers. Currently, we have developed a **random agent** and a **rule-based agent**.
 You can find this code in `sinergym/sinergym/utils/controllers.py <https://github.com/jajimer/sinergym/blob/main/sinergym/utils/controllers.py>`__.
-it is very useful in order to perform benchmarks as a reference point to study DRL algorithms: example
+it is very useful in order to perform benchmarks as a reference point to study DRL algorithms: lesson
 
 .. literalinclude:: ../../../sinergym/utils/controllers.py
     :language: python
